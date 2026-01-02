@@ -85,6 +85,8 @@ config.enable_scroll_bar = true
 config.default_cursor_style = "BlinkingBar"
 config.cursor_blink_rate = 600
 
+config.font = wezterm.font("Hack")
+
 ----------------------------------------------------
 -- keybinds
 ----------------------------------------------------
