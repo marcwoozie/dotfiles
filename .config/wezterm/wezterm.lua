@@ -81,6 +81,10 @@ config.scrollback_lines = 5000
 -- スクロールバーを表示
 config.enable_scroll_bar = true
 
+-- カーソルの点滅設定
+config.default_cursor_style = "BlinkingBar"
+config.cursor_blink_rate = 600
+
 ----------------------------------------------------
 -- keybinds
 ----------------------------------------------------
