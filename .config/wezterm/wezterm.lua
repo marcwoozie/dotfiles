@@ -78,7 +78,7 @@ end)
 config.disable_default_key_bindings = true
 config.keys = require("keybinds").keys
 config.key_tables = require("keybinds").key_tables
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
+config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 2000 }
 config.skip_close_confirmation_for_processes_named = {}
 
 return config
