@@ -72,6 +72,15 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
   }
 end)
 
+-- タブなどを消す際のコンファーム画面をパスする設定_すべての確認コンファームを出す
+config.skip_close_confirmation_for_processes_named = {}
+
+-- スクロールバックできる長さ
+config.scrollback_lines = 5000
+
+-- スクロールバーを表示
+config.enable_scroll_bar = true
+
 ----------------------------------------------------
 -- keybinds
 ----------------------------------------------------
@@ -79,6 +88,5 @@ config.disable_default_key_bindings = true
 config.keys = require("keybinds").keys
 config.key_tables = require("keybinds").key_tables
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 2000 }
-config.skip_close_confirmation_for_processes_named = {}
 
 return config
