@@ -12,12 +12,6 @@ end)
 
 return {
   keys = {
-    -- scrollbackする設定だが、バッファも消えてしまうので一旦コメント
-    -- {
-    --   key = "r",
-    --   mods = "CMD",
-    --   action = wezterm.action.ClearScrollback("ScrollbackAndViewport"),
-    -- },
     {
       -- workspaceの切り替え
       key = "w",
