@@ -82,7 +82,9 @@ config.scrollback_lines = 5000
 config.enable_scroll_bar = true
 
 -- カーソルの点滅設定
-config.default_cursor_style = "BlinkingBar"
+config.default_cursor_style = "BlinkingBlock"
+config.cursor_blink_ease_in = "Constant"
+config.cursor_blink_ease_out = "Constant"
 config.cursor_blink_rate = 600
 
 config.font = wezterm.font("Hack")
