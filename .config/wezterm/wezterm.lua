@@ -4,8 +4,9 @@ local config = wezterm.config_builder()
 config.automatically_reload_config = true
 config.font_size = 11.0
 config.use_ime = true
-config.window_background_opacity = 0.65
-config.macos_window_background_blur = 5
+config.window_background_opacity = 0.7
+config.macos_window_background_blur = 2
+config.color_scheme = "tokyonight"
 
 ----------------------------------------------------
 -- Tab
