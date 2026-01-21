@@ -48,6 +48,19 @@ return {
         end),
       }),
     },
+    -- 新しいウィンドウを開く（ルートディレクトリで）
+    {
+      key = "n",
+      mods = "SUPER",
+      action = wezterm.action_callback(function(window, pane)
+        window:perform_action(
+          act.SpawnCommandInNewWindow({
+            cwd = "/",
+          }),
+          pane
+        )
+      end),
+    },
     -- コマンドパレット表示
     { key = "p", mods = "SUPER", action = act.ActivateCommandPalette },
     -- Tab移動
@@ -55,8 +68,20 @@ return {
     { key = "Tab", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(-1) },
     -- Tab入れ替え
     { key = "{", mods = "LEADER", action = act({ MoveTabRelative = -1 }) },
-    -- Tab新規作成
-    { key = "t", mods = "SUPER", action = act({ SpawnTab = "CurrentPaneDomain" }) },
+    -- Tab新規作成（カレントディレクトリを保持）
+    {
+      key = "t",
+      mods = "SUPER",
+      action = wezterm.action_callback(function(window, pane)
+        local cwd = pane:get_current_working_dir()
+        window:perform_action(
+          act.SpawnCommandInNewTab({
+            cwd = tostring(cwd),
+          }),
+          pane
+        )
+      end),
+    },
     -- Tabを閉じる
     { key = "w", mods = "SUPER", action = act({ CloseCurrentTab = { confirm = true } }) },
     { key = "}", mods = "LEADER", action = act({ MoveTabRelative = 1 }) },
