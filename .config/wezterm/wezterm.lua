@@ -5,7 +5,7 @@ config.automatically_reload_config = true
 config.font_size = 11.0
 config.use_ime = true
 config.window_background_opacity = 0.7
-config.macos_window_background_blur = 0
+config.macos_window_background_blur = 10
 config.color_scheme = "Tomorrow Night Blue"
 
 ----------------------------------------------------
