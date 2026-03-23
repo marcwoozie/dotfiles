@@ -4,9 +4,9 @@ local config = wezterm.config_builder()
 config.automatically_reload_config = true
 config.font_size = 11.0
 config.use_ime = true
-config.window_background_opacity = 0.7
+config.window_background_opacity = 0.8
 config.macos_window_background_blur = 10
-config.color_scheme = "Tomorrow Night Blue"
+config.color_scheme = "tokyonight_moon"
 
 ----------------------------------------------------
 -- Tab
@@ -28,7 +28,12 @@ config.window_frame = {
 
 -- タブバーを背景色に合わせる
 config.window_background_gradient = {
-	colors = { "#002b35" },
+	orientation = "Vertical",
+	colors = {
+		"#1a1b26", -- わずかな暗転
+		"#16161e", -- メインの暗闇
+		"#101014", -- ほぼ黒（ゴール：一番深い闇）
+	},
 }
 
 -- タブの追加ボタンを非表示
