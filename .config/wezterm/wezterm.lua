@@ -88,7 +88,7 @@ config.cursor_blink_ease_in = "Constant"
 config.cursor_blink_ease_out = "Constant"
 config.cursor_blink_rate = 600
 
-config.font = wezterm.font("Hack")
+config.font = wezterm.font("Hack Nerd Font")
 
 ----------------------------------------------------
 -- keybinds
