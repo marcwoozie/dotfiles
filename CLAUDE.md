@@ -19,8 +19,7 @@
 ├── nvim/                           # Neovim 設定（LazyVim ベース）
 │   ├── init.lua                    # エントリーポイント
 │   ├── lua/config/                 # コア設定
-│   │   ├── lazy.lua                # Lazy.nvim ブートストラップ
-│   │   ├── options.lua             # Neovim オプション
+|   │   ├── options.lua             # Neovim オプション
 │   │   ├── keymaps.lua             # キーマップ
 │   │   └── autocmds.lua            # オートコマンド
 │   ├── lua/plugins/                # プラグイン設定
