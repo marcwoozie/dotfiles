@@ -1,5 +1,30 @@
 return {
   {
+    "akinsho/bufferline.nvim", 
+    version = "*", 
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+        require("bufferline").setup({
+          options = {
+            mode = "buffers", -- "tabs"にするとNeovim本来のタブ表示になります
+            separator_style = "thick", -- 見た目（thin, thick, slantなど）
+            always_show_bufferline = true,
+            show_buffer_close_icons = true,
+            show_close_icon = true,
+            diagnostics = "nvim_lsp", -- LSPのエラー等を表示
+            offsets = {
+              {
+                filetype = "neo-tree",
+                text = "File Explorer",
+                text_align = "left",
+                separator = true,
+              }
+            },
+          }
+        })
+      end,
+  },
+  {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
