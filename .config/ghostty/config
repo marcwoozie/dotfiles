@@ -49,6 +49,8 @@
 # resize-overlay-duration = 4s 200ms
 
 command = /opt/homebrew/bin/fish --login
+# 新規タブで現在のディレクトリを引き継がない（working-directory = home で開く）
+tab-inherit-working-directory = false
 background-opacity = 0.8
 background-blur = 10
 keybind = super+r=clear_screen
