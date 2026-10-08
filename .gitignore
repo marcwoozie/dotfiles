@@ -1,0 +1,26 @@
+anyenv
+
+firebase
+
+flutter
+
+iterm2
+
+configstore
+
+gh
+
+karabiner
+
+sanity
+
+raycast
+
+# fish: 設定本体は管理するが、fisher が生成するプラグインや実行時の状態は除外する
+# (scripts/fish-setup.sh が fisher 経由で再生成する)
+.config/fish/functions/
+.config/fish/completions/
+.config/fish/themes/
+.config/fish/fish_variables
+.config/fish/fish_history
+.config/fish/conf.d/_tide_init.fish
