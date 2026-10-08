@@ -8,6 +8,7 @@ cd ~/workspace/dotfiles
 
 bash scripts/fish-setup.sh   # fish（シェル）
 bash scripts/tmux-setup.sh   # tmux
+bash scripts/nvim-setup.sh   # Neovim
 ```
 
 Homebrew が未導入の場合は先に入れておく。
@@ -109,3 +110,52 @@ bash scripts/tmux-setup.sh --skip-reload
 ```
 
 セットアップ後、tmux 内で `prefix + I` を押して TPM でプラグインをインストールする。
+
+## Neovim
+
+管理対象は `.config/nvim/` 以下（[LazyVim](https://www.lazyvim.org/) ベース）。
+
+| パス | 内容 |
+| --- | --- |
+| `init.lua` | エントリーポイント |
+| `lua/config/` | lazy.nvim のブートストラップ・オプション・キーマップ・オートコマンド |
+| `lua/plugins/` | プラグインの追加・上書き設定 |
+| `lazy-lock.json` | プラグインのロック済みバージョン |
+| `lazyvim.json` | 有効にしている LazyVim extras |
+
+プラグイン本体や Mason が入れるツールは `~/.local/share/nvim/` に置かれ、リポジトリには含めない
+（セットアップ時に再生成される）。
+
+### Setup
+
+```sh
+bash scripts/nvim-setup.sh
+```
+
+以下を順に行う。
+
+1. neovim を Homebrew でインストール（未インストール時のみ）
+2. LazyVim が利用する外部ツール（`ripgrep` `fd` `fzf` `lazygit` `tree-sitter-cli`）をインストール
+3. `~/.config/nvim` を `.config/nvim` へシンボリックリンク（既存の設定は `.bak.<日時>` に退避）
+4. `lazy-lock.json` のバージョンでプラグインをインストール（`:Lazy restore`）
+
+Dry-run:
+
+```sh
+bash scripts/nvim-setup.sh --dry-run
+```
+
+Options:
+
+```sh
+bash scripts/nvim-setup.sh --skip-install   # neovim のインストールをしない
+bash scripts/nvim-setup.sh --skip-deps      # 外部ツールを入れない
+bash scripts/nvim-setup.sh --skip-plugins   # プラグインを入れない
+```
+
+LSP サーバーやフォーマッタ（Mason）、treesitter のパーサーは初回の `nvim` 起動時に自動で導入される。
+アイコン表示には Nerd Font が必要。
+
+### プラグインを更新したとき
+
+`:Lazy update` などで `lazy-lock.json` が変わったら、あわせてコミットする。
