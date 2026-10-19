@@ -1,3 +1,4 @@
+onboarding = false
 # herdr configuration
 # Place this file at ~/.config/herdr/config.toml
 
@@ -10,6 +11,8 @@
 #                  gruvbox, one-dark, solarized, kanagawa, rose-pine,
 #                  vesper
 # name = "catppuccin"
+# tmux の catppuccin (mocha) に合わせる
+name = "catppuccin"
 
 # Follow host terminal light/dark appearance and switch Herdr UI themes.
 # Existing manual behavior is unchanged unless this is true.
@@ -64,6 +67,35 @@
 # Most reliable direct bindings are ctrl+letter, function keys, and explicit modified chords.
 # alt+..., cmd/super, and punctuation-with-modifiers may depend on your terminal/tmux setup.
 prefix = "ctrl+g"
+
+# --------------------------------------------
+# tmux (.config/tmux/.tmux.conf) に寄せたキーバインド
+# --------------------------------------------
+# ペイン分割: prefix+| で左右分割、prefix+- で上下分割
+# ターミナルによって | が shift+\ や shift+| として届くため、別表記は下の custom command で拾う
+split_vertical = "prefix+|"
+split_horizontal = "prefix+minus"
+# prefix+v: tmux の copy-mode 相当としてスクロールバックをエディタで開く
+edit_scrollback = "prefix+v"
+# prefix+r: 設定リロード（tmux の source-file 相当）
+reload_config = "prefix+r"
+# リサイズ: tmux-pain-control と同じ prefix+H/J/K/L
+resize_mode = "prefix+shift+r"
+resize_pane_left = "prefix+shift+h"
+resize_pane_down = "prefix+shift+j"
+resize_pane_up = "prefix+shift+k"
+resize_pane_right = "prefix+shift+l"
+# tmux 標準キーに合わせる
+detach = "prefix+d"
+rename_tab = "prefix+comma"
+close_tab = "prefix+ampersand"
+rename_workspace = "prefix+$"
+last_pane = "prefix+semicolon"
+cycle_pane_next = "prefix+o"
+open_notification_target = "prefix+shift+o"
+# prefix+g / prefix+b は下の custom command に譲る
+goto = "prefix+f"
+toggle_sidebar = "prefix+shift+b"
 
 # Prefix-mode actions
 # help = "prefix+?"
@@ -129,6 +161,34 @@ prefix = "ctrl+g"
 # type = "popup" opens a session-modal terminal without changing the tab layout.
 # Popup width and height accept terminal cells or percentages such as "80%".
 # On Windows, command strings run through cmd.exe /d /c.
+
+# prefix+| の別表記（Shift 付きで届くターミナル向け）。いずれも右に分割する
+[[keys.command]]
+key = "prefix+shift+|"
+type = "shell"
+command = "herdr pane split --current --direction right"
+
+[[keys.command]]
+key = "prefix+shift+backslash"
+type = "shell"
+command = "herdr pane split --current --direction right"
+
+# prefix+g: カレントディレクトリでシェルのポップアップを開く（tmux の display-popup 相当）
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+command = "$SHELL"
+width = "60%"
+height = "60%"
+
+# prefix+b: fzf で git branch を選んでクリップボードにコピー
+[[keys.command]]
+key = "prefix+b"
+type = "popup"
+command = "git branch --format='%(refname:short)' | fzf --reverse | tr -d '\\n' | pbcopy"
+width = "60%"
+height = "40%"
+
 # [[keys.command]]
 # key = "prefix+alt+g"
 # type = "popup"
@@ -153,6 +213,26 @@ prefix = "ctrl+g"
 # directory = "~/.herdr/worktrees"
 
 [ui]
+# --------------------------------------------
+# tmux に寄せた見た目
+# --------------------------------------------
+# ステータスバー（タブバー）は tmux と同じく画面下部
+tab_bar_position = "bottom"
+# 右端: 実行中コマンド・日時・バッテリー（catppuccin の status-right 相当）
+tab_bar_right = [
+  { type = "zoom" },
+  { type = "datetime", format = "%Y-%m-%d %H:%M:%S" },
+  { type = "command", command = "pmset -g batt | grep -Eo '[0-9]+%' | head -1", interval_seconds = 60 },
+]
+tab_bar_right_separator = " │ "
+# tmux 風に外枠・隙間・スクロールバーなしの内側区切り線だけにする
+pane_outer_borders = false
+pane_gaps = false
+pane_scrollbars = false
+# pane-border-status top のようにペイン上部にラベルを出す
+show_agent_labels_on_pane_borders = true
+# アクティブペインの強調色（tmux の ACTIVE ラベルと同じ #7dcfff）
+accent = "#7dcfff"
 # Sidebar width (auto-scaled based on workspace names, this sets the default)
 # sidebar_width = 26
 
@@ -281,6 +361,7 @@ prefix = "ctrl+g"
 # accent = "cyan"
 
 # Background notification popup delivery
+agent_panel_sort = "priority"
 [ui.toast]
 # off = disable pop-up notifications
 # herdr = show in-app toasts
