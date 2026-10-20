@@ -216,8 +216,8 @@ height = "40%"
 # --------------------------------------------
 # tmux に寄せた見た目
 # --------------------------------------------
-# ステータスバー（タブバー）は tmux と同じく画面下部
-tab_bar_position = "bottom"
+# ステータスバーの位置
+tab_bar_position = "top"
 # 右端: 実行中コマンド・日時・バッテリー（catppuccin の status-right 相当）
 tab_bar_right = [
   { type = "zoom" },
