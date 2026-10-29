@@ -59,3 +59,8 @@ term = "xterm-256color"
 font-size = "11"
 quick-terminal-position = "center"
 quick-terminal-size = "100%, 100%"
+# タイトルバーは信号機ボタンだけ残し、背景になじませてタイトル文字を出さない
+# （タブ・タイトルは herdr 側で表示する。title を固定するとエスケープシーケンスでの変更も無視される）
+macos-titlebar-style = transparent
+macos-titlebar-proxy-icon = hidden
+title = " "
