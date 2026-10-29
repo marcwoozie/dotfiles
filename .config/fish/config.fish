@@ -72,3 +72,28 @@ if status is-interactive
     # Ctrl + L に割り当て
     bind \cl push_to_top
 end
+
+# herdr: タブ名をカレントディレクトリ名と同期する（herdr 内のシェルでのみ有効）
+if status is-interactive; and set -q HERDR_TAB_ID; and command -q herdr
+    function __herdr_sync_tab_name --on-variable PWD -d "herdr のタブ名をカレントディレクトリ名にする"
+        set -l name (path basename $PWD)
+        test "$PWD" = "$HOME"; and set name "~"
+        # 数 ms で返るので同期実行する（バックグラウンドだと連続 cd で順序が入れ替わる）
+        command herdr tab rename $HERDR_TAB_ID $name >/dev/null 2>&1
+    end
+    __herdr_sync_tab_name
+end
+
+# herdr: ~/workspace 配下のリポジトリを選び、同名の space があれば移動、無ければ作成する
+# herdr の prefix+s ポップアップから fish -c herdr-repo で呼ばれる
+function herdr-repo -d "リポジトリを選んで herdr の space を開く"
+    set -l dir (path filter -d $HOME/workspace/* | fzf --reverse --prompt 'repo> ' --delimiter / --with-nth -1)
+    test -n "$dir"; or return
+    set -l name (path basename $dir)
+    set -l id (herdr workspace list | jq -r --arg n $name '.result.workspaces[] | select(.label == $n) | .workspace_id' | head -1)
+    if test -n "$id"
+        herdr workspace focus $id >/dev/null
+    else
+        herdr workspace create --cwd $dir --label $name --focus >/dev/null
+    end
+end
