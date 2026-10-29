@@ -31,6 +31,7 @@ name = "catppuccin"
 # red = "#ff6188"
 # green = "#a6e3a1"
 
+auto_switch = false
 [terminal]
 # Executable used for new interactive panes.
 # Empty means $SHELL, then /bin/sh.
@@ -87,6 +88,12 @@ resize_pane_up = "prefix+shift+k"
 resize_pane_right = "prefix+shift+l"
 # tmux 標準キーに合わせる
 detach = "prefix+d"
+new_tab = "prefix+t"
+# prefix+s はリポジトリ選択（下の custom command）に譲り、設定画面は prefix+shift+s へ
+settings = "prefix+shift+s"
+# space の前後移動（tmux の switch-client -p/-n と同じ prefix+( / prefix+)）
+previous_workspace = "prefix+("
+next_workspace = "prefix+)"
 rename_tab = "prefix+comma"
 close_tab = "prefix+ampersand"
 rename_workspace = "prefix+$"
@@ -172,6 +179,14 @@ command = "herdr pane split --current --direction right"
 key = "prefix+shift+backslash"
 type = "shell"
 command = "herdr pane split --current --direction right"
+
+# prefix+s: リポジトリを fzf で選び、同名の space があれば移動、無ければ作成（fish の herdr-repo 関数）
+[[keys.command]]
+key = "prefix+s"
+type = "popup"
+command = "fish -c herdr-repo"
+width = "60%"
+height = "60%"
 
 # prefix+g: カレントディレクトリでシェルのポップアップを開く（tmux の display-popup 相当）
 [[keys.command]]
@@ -285,6 +300,8 @@ accent = "#7dcfff"
 # Ask for a tab name before creating a new tab.
 # Set false to create tabs immediately with generated names.
 # prompt_new_tab_name = true
+# タブ名は fish 側でディレクトリ名に同期するので聞かない
+prompt_new_tab_name = false
 
 # Ask for a workspace name before interactive creation.
 # prompt_new_workspace_name = false
@@ -370,6 +387,7 @@ agent_panel_sort = "priority"
 # delivery = "off"
 # delay_seconds = 1
 
+delivery = "system"
 [ui.toast.herdr]
 # position = "bottom-right"
 
@@ -390,6 +408,7 @@ agent_panel_sort = "priority"
 # [ui.sound.agents]
 # droid = "off"
 
+enabled = false
 [session]
 # Resume supported AI-agent panes into their native conversation sessions after
 # a Herdr server restart. Requires official integrations that report session refs.
